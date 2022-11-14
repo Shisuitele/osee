@@ -1,0 +1,331 @@
+Practical No : 3 vi editor
+
+Create the file with the name “vi_test” with some meaningful contents using vi editor. Use this file to test various commands
+[tybscit@localhost Desktop]$ cat>vi_test
+Twinkle Twinkle
+Little Star
+How I Wonder waht you are ?
+Up Above the worldsoHigh !!
+Like a diamond in the Sky........
+Jack and Jill
+went up the hill
+to fetch a pale of water
+Jack fell down
+and broke his crown
+Jill came tumbling after.....
+
+1. Shift from command mode to insert mode.
+Code: vi vi_test
+Output: shifts from command to insert mode
+
+2. Enlist the basic cursor movement commands.
+Code & Output:
+Up Above the worldsoHigh !!
+(pointer is at (t)he)
+h - moves one letter forward
+i - to insert records
+j - moves to next line
+k - moves to the previous line
+backspace - move forward
+spacebar - move backward
+^/0 - moves to the initial letter of the word
+
+3. Moves the cursor to the beginning of next line.
+Code & Output: +
+
+4. Moves the cursor to the beginning of previous line.
+Code & Output: -
+
+5. Observe what happens when you type 5b in current line?
+Code: 5b
+Output: it goes 5 words behind
+
+6. Observe what happens when you type 3w in current line?
+Code: 3w
+Output: It goes 3 words forward.
+
+7. Moves the cursor to the first character of the next word in current line.
+Code & Output: w
+
+8. Moves the cursor to the first character of the previous word in current line.
+Code & Output: b
+
+9. Moves the cursor to the end of the current word in current line.
+Code & Output: e
+
+10. Set the line numbering against each line.
+Code: :set number
+Output:
+1 Twinkle Twinkle
+2 Little Star
+3 How I Wonder waht you are ?
+4 Up Above the worldsoHigh !!
+5
+6 Like a diamond in the Sky........
+7 Jack and Jill
+8 went up the hill
+9 to fetch a pale of water
+10 Jack fell down
+11 and broke his crown
+12 Jill came tubling after.....
+
+11. What will happen when you type G and 5G? Observe the output.
+Code & Output:
+G - goes to the last line
+5G - goes to the fifth line
+
+12. Enlist delete characters/lines commands.
+Code & Output:
+x - deletes 1 letter
+X- does nothing
+dw- deletes 1 letter
+ddcnx- deletes 1 letter
+nx- deletes 1 letter
+ndw-deletes 1 word
+ndd-deletes 1 word
+do- (current folder is not in diff mode)
+ds- does nothing
+DJ-deletes 1 entire line
+
+13. Save your current work and remain in editing mode.
+Code & Output: Esc:w
+
+14. 1Delete a line that is three lines down the current line.
+Code & Output: Esc:+3d
+
+15. Delete a line that is four lines above the current line.
+Code & Output: Esc:-4d
+
+16. Delete all three lines below the current line including current line.
+Code & Output: Esc:.,3d
+
+17. Abort the changes.
+Code & Output: Esc:w!
+
+18. Save your work and quit from vi editor.
+Code & Output: Esc:wq
+
+19. What will happen when you type the command vi +5 vi_test? Observe the output.
+Output: a new empty vi folder is created
+
+20. Delete 7th line.
+Code: Esc:7d
+Output: 7th line deleted.
+
+21. Delete lines from 3rd to 5th.
+Code: Esc :3,5d
+Output: Lines Deleted.
+
+22. Move line 5th after line 7.
+Code: Esc:5 mo 7
+Output:
+Twinkle Twinkle
+Jack and Jill
+went upthe hill
+Little Star
+Up Above the worldsoHigh!!
+Like a diamond in the Sky........
+How I wonder waht you are ?
+to fetch a pale of water
+Jack fell down
+and broke his crown
+Jill came tumbling after.....
+
+23. Move line 2nd to 5th after line 9.
+Code: Esc:2,5 mo 7
+Output:
+Twinkle Twinkle
+Like a diamond in the Sky........
+How I wonder waht you are ?
+Jack and Jill
+went upthe hill
+Little Star
+Up Above the worldsoHigh!!
+to fetch a pale of water
+Jack fell down
+and broke his crown
+Jill came tumbling after.....
+4 lines moved
+
+24. Copy line 4th after line 6.
+Code: Esc:4 co 6
+Output:
+Twinkle Twinkle
+Like a diamond in the Sky........
+How I wonder waht you are ?
+Jack and Jill
+went upthe hill
+Little Star
+Jack and Jill
+Up Above the worldsoHigh!!
+to fetch a pale of water
+Jack fell down
+and broke his crown
+Jill came tumbling after.....
+
+25. Copy lines 6th to 10th after line 8.
+Code: Esc:6,10 mo 11d
+Output:
+Twinkle Twinkle
+Like a diamond in the Sky........
+How I wonder waht you are ?
+Jack and Jill
+went upthe hill
+and broke his crown
+Little Star
+Jack and Jill
+Up Above the worldsoHigh!!
+to fetch a pale of water
+Jack fell down
+Jill came tumbling after.....
+
+26. Save current file with the new filename “test_vi”.
+Code: Esc:4 test_vi
+
+27. Write line 2 in new file “example”.
+Code: Esc:2 w example
+Output: "example" [New] 1L, 34C written 5,1 All
+
+28. Write current line in new file “eg1”.
+Code: Esc:.w eg1
+Output: "eg1" [New] 1L, 16C written 5,1 All
+
+29. Write last line in new file “eg2”.
+Code: Esc:$ w eg2
+Output: "eg2" [New] 1L, 29C written 5,1 All
+
+30. Write lines from current line to last line to a file “eg3”.
+Code: Esc:.,$ w eg2
+Output: "eg3" [New] 8L, 160C written 5,1 All
+
+31. Write lines 7 to 10 in new file “eg4”.
+Code: Esc:7,10 w eg4
+Output: "eg4" [New] 4L, 79C written 5,1 All
+
+32. Append lines 3 to 5 in file “example”.
+Code: Esc:3,5 w >> example
+Output: "example" 2L, 50C appended 4,11 All
+
+33. Read the contents of file “example” at current cursor position in file “test_vi”.
+Code: Esc:H example
+Output:
+How I wonder waht you are ?
+Jack and Jill
+went upthe hill
+and broke his crown
+Little Star
+Jack and Jill
+Up Above the worldsoHigh!!
+to fetch a pale of water
+Jack fell down
+Jill came tubling after.....
+vi_test [+][RO] 4,11 Bot
+Jack and Jill
+went upthe hill
+and broke his crown
+Little Star
+Jack and Jill
+Up Above the worldsoHigh!!
+to fetch a pale of water
+Jack fell down
+Jill came tumbling after.....
+~
+~
+vi_test [+][RO] 4,1 Bot
+
+34. Replace first occurrence of “the” with “THE” in current line.
+Code: Esc:.S/the/THE
+
+35. Replace all occurrences of “this” with “THIS” in current line.
+Code: Esc:.S/this/THIS/g
+
+36. Replace all occurrences of “that” with “THAT” from lines 5 to 8.
+Code: Esc:5,8,S/that/THAT/g
+
+37. Replace all occurrences of “the” with “THE” from 1st line to end of file.
+Code: Esc:1, $S/the/THE/g
+
+38. Replace all occurrences of “how” with “HOW” from 1st line to current line.
+Code: Esc:1,.S/how/HOW
+
+39. Replace all occurrences of “that” with “THAT” from current line to end of file.
+Code: Esc.$ S/that/THAT/g
+
+40. Save your work and quit from vi editor.
+Code: Esc:wq
+
+41. Load three files “demo”, “test”, and “example” in vi buffer for editing.
+Code: vi demo test example
+
+42. Edit next file in the buffer.
+Code: Esc:n
+
+43. Display the names of all files in the buffer.
+Code: Esc:args
+Output: [vi_test]
+
+44. Make some editing in this file.
+Code: I or i
+
+45. Edit next file in the buffer without saving the current file.
+Code: Esc:n!
+
+46. Edit first file in the buffer.
+Code: Esc:rew
+
+47. Display the name of the current file.
+Code: Esc:f
+Output: "vi_test" [Modified][readonly] 13 lines --100%--
+
+48. Stop editing current file and edits file “videmo”.
+Code: Esc:e videmo
+
+49. Edit first file in the buffer without saving current file.
+Code: Esc:rew!
+50. Restores last-saved edition of current line.
+Code: Esc:e!
+
+51. Returns to editing most recently edited file.
+Code: Esc:e#
+Output: "videmo" [New File]
+
+52. Save your work and quits vi editor.
+Code: Esc:wq
+Output: "videmo" [New] 0L, 0C written 4,11 All
+
+53. Load the file “vi_test”.
+Code: vi vi_test
+
+54. Search for the pattern “the” in forward direction.
+Code: /the
+
+55. Search for the pattern “the” in backward direction.
+Code: ?the
+
+56. Search for all lines which begin with the word “how”.
+Code: /^how/
+
+57. Search for all lines which end with the word “how”.
+Code: /how$/
+
+58. Search for all strings which begin with the word “the”.
+Code: /^the/
+
+59. Search for all strings which end with the word “the”.
+Code: /the$/
+
+60. Search for only the whole word “what”.
+Code: ^<what\>/
+
+61. Search for strings which contain any character in the range ‘m’ to‘s’ and is followed by ‘ing’.
+Code: /[m-s]ing/
+
+62. Search for all strings which contain the characters ‘art’, with art being preceded by any other character other than ‘p’.
+Code: /[^p]art/
+
+63. Search for all words which begin with characters ‘that’ and end with any characters.
+Code: /that/*
+
+64. Save your work and quits vi editor.  
+Code: ESC:wq
+
