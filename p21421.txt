@@ -1,0 +1,283 @@
+14] Write a shell script to display list of all files and directories in current working directory separately.
+Code: vi 41
+f=0
+s=0
+d=0
+for i in *
+do
+if [-f $i]
+then
+f=$[$f+1]
+elif [-d $i]
+then
+d=$[$d+1]
+else
+s=$[$s+1]
+fi
+done
+echo "The number of directory $d"
+echo "The number of files :$f"
+echo "The number of special files :$s"
+Output:
+[tybscit@localhost Desktop]$ sh 41
+The number of directory 0
+The number of files :0
+The number of special files :9
+
+15] Write a shell script which checks every minute how many users currently logged in.
+Code: vi 42
+while [ true ]
+do
+x=`who|wc -l`
+echo "Number of users currently logged in :$x"
+sleep 60
+done
+Output:
+[tybscit@localhost Desktop]$ sh 42
+Number of users currently logged in :2
+Number of users currently logged in :2
+
+16] Write a shell script to create a file which stores name of file. Against each name put morning, evening or afternoon depending upon time at which file is created.
+Code: vi 44
+for i in *
+do
+if [ -f $i ]
+then
+x=`ls -l $i | cut -c 45-47`
+echo "$x"
+if [ $x -ge 6 -a $x -lt 12 ]
+then
+echo "$i: morning" >>b1
+elif [ $x -ge 12 -a $x -lt 16 ]
+then
+echo "$i: afternoon" >>b1
+elif [ $x -ge 16 -a $x -lt 20 ]
+then
+echo "$i: evening" >>b1
+else
+echo "$i: goodnight" >>b1
+fi
+cat b1
+else
+echo "File does not exist"
+fi
+done
+Output:
+[tybscit@localhost Desktop]$ sh 44
+a1: goodnight
+a2: goodnight
+a3: goodnight
+list: goodnight
+prog36: goodnight
+prog36~: goodnight
+prog37: goodnight
+prog37~: goodnight
+prog38: goodnight
+prog38~: goodnight
+prog39: goodnight
+prog39~: goodnight
+prog40: goodnight
+prog40~: goodnight
+prog41: goodnight
+prog41~: goodnight
+prog42: goodnight
+prog42~: goodnight
+prog43: goodnight
+prog43~: goodnight
+prog44: goodnight
+prog44~: goodnight
+prog45: goodnight
+prog45~: goodnight
+prog46: goodnight
+prog46~: goodnight
+
+17] Write a shell script to accept a username. If user is not present then appropriate
+message should be displayed otherwise tell the user to logout, wait for 5 seconds and kill his job.
+Code: vi 45
+echo "Enter username:"
+read u
+x=`who|grep -c "$u"`
+if [ $x -eq 0 ]
+then
+echo "$u user not present."
+else
+echo "$u user present....please save your work....system will shut down in some
+time"
+sleep 5
+shut down -h 0
+fi
+Output:
+[tybscit@localhost Desktop]$ sh 45
+Enter username:
+tybscit
+tybscit user present....please save your work....system will shut down in some
+time
+
+18] Write a shell script to accept file name from user, store the names in new file if length of name is less than 10.
+Code: vi 46
+count=1
+while [ $count -le 5 ]
+do
+echo "Enter name $count"
+read name
+len=${#name}
+if [ $len -lt 10 ]
+then
+echo "$name">>demo
+fi
+count=$[ $count+1 ]
+done
+echo "The name whose length is less than 10 are :"
+cat demo
+Output:
+[tybscit@localhost Desktop]$ sh 46
+Enter name 1
+rampatel
+Enter name 2
+ram
+Enter name 3
+patel
+Enter name 4
+ichigokurosaki
+Enter name 5
+urahara
+The name whose length is less than 10 are :
+ram
+patel
+urahara
+
+19] Write a shell script to pick up a shell script file and convert first 10 lines from lower to uppercase.
+Code: vi 48
+echo "Enter file name :"
+read f
+for f in *.c
+do
+if [ -f$f ]
+then
+echo "The original content of $f file :"
+cat $f
+echo "The translated first 2 lines of $f file :"
+head -2 $f|tr '[a-z]' '[A-Z]'
+else
+echo "$f is not a file"
+fi
+done
+Output:
+[tybscit@localhost Desktop]$ sh 48
+Enter file name :
+471.c
+The original content of 471.c file :
+echo "Enter c program file"
+read f1
+if [ -f$f1 ]
+then
+echo "$f1 exist"
+echo "Compiling and executing $f1 file"
+cc -o a1.out $f1
+echo "The output of $f1 file is "
+./a1.out
+else
+echo "$f1 file does not exist."
+fi
+The translated first 2 lines of 471.c file :
+ECHO "ENTER C PROGRAM FILE"
+READ F1
+The original content of 47.c file :
+#include<stdio.h>
+main()
+{
+printf("Hello World !!\n");
+}
+The translated first 2 lines of 47.c file :
+#INCLUDE<STDIO.H>
+MAIN()
+
+20] Write a shell script to accept 5 student marks, name and roll number. Store these details in pass or fail file depending on their marks.
+Code: vi 49
+count=1
+while [ $count -lt 5 ]
+do
+echo "Enter roll number,name and marks $count:"
+read rlno
+read nm
+read mks
+if [ $mks -lt 35 ]
+then
+echo "$rlno~$nm~$mks">>fail
+else
+echo "$rlno~$nm~$mks">>pass
+fi
+count=$[ $count+1 ]
+done
+echo "Students who have passed:"
+cat pass
+echo "Students who have failed :"
+cat fail;
+Output:
+[tybscit@localhost Desktop]$ sh 49
+Enter roll number,name and marks 1:
+1
+ram
+80
+Enter roll number,name and marks 2:
+2
+aaryan
+77
+Enter roll number,name and marks 3:
+3
+dodo
+90
+Enter roll number,name and marks 4:
+4
+dumdum
+30
+Students who have passed:
+1 77~2 33~3 99
+1 ram 88~2 aaryan 80~3 dodo 70
+1 ram 99~2 aaryan 66~3 dodo 89
+1~ram~80
+2~aaryan~77
+3~dodo~90
+Students who have failed :
+4~dumdum~30
+
+21] Write a shell script to accept 2 file names from user. Translate all characters of a first file from lower to uppercase and store it in second file.
+Code: vi 50
+echo "Enter file 1 name"
+read f1
+if [ -f$f1 ]
+then
+echo "The $f1 exists."
+echo "The contents of $f1 are :"
+cat $f1
+while [ true ]
+do
+echo "Enter file 2 name"
+read f2
+if [ -f$f2 ]
+then
+echo "$f2 exist......Please enter other name"
+echo "The translated content of $f1"
+tr '[a-z]' '[A-Z]' <$f1 >$f2
+cat $f2
+break
+fi
+done
+break
+else
+Output:
+[tybscit@localhost Desktop]$ sh 50
+Enter file 1 name
+demo
+The demo exists.
+The contents of demo are :
+ram
+patel
+urahara
+Enter file 2 name
+demo2
+demo2 exist......Please enter other name
+The translated content of demo
+RAM
+PATEL
+URAHARA
